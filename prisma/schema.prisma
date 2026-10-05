@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          Int        @id @default(autoincrement())
+  name        String
+  date        String
+  location    String
+  description String     @default("")
+  categories  Category[]
+}
+
+model Category {
+  id         Int           @id @default(autoincrement())
+  eventId    Int
+  event      Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name       String
+  bibPrefix  String
+  fee        Int           @default(0)
+  quota      Int
+  filled     Int           @default(0)
+  bibCounter Int           @default(0)
+  jerseys    JerseyStock[]
+  runners    Participant[]
+
+  @@unique([eventId, name])
+}
+
+model JerseyStock {
+  id         Int      @id @default(autoincrement())
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  size       String
+  stock      Int      @default(0)
+
+  @@unique([categoryId, size])
+}
+
+model Participant {
+  id           Int       @id @default(autoincrement())
+  categoryId   Int
+  category     Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name         String
+  email        String
+  phone        String
+  jerseySize   String
+  bib          String    @unique
+  registeredAt String
+  result       Result?
+
+  @@unique([categoryId, email])
+  @@index([bib])
+}
+
+model Result {
+  id              Int         @id @default(autoincrement())
+  participantId   Int         @unique
+  participant     Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  chipTimeSeconds Int?
+  status          String      @default("FINISHED")
+  importedAt      String
+}
