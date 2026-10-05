@@ -52,3 +52,6 @@ Buka http://localhost:3000
 ## Stack
 
 Next.js 14 + TypeScript + Prisma 5.22 + SQLite + Tailwind CSS, `xlsx`, `pdf-lib`.
+
+## Log Harian
+- 2026-10-05 — update #1: sinkronisasi dokumentasi; build sehat.
