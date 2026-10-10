@@ -109,3 +109,4 @@ Next.js 14 + TypeScript + Prisma 5.22 + SQLite + Tailwind CSS, `xlsx`, `pdf-lib`
 - 2026-10-10 — update #3: cek ulang daftar endpoint admin.
 - 2026-10-10 — update #4: pemeliharaan rutin dokumentasi.
 - 2026-10-10 — update #5: verifikasi tautan endpoint di README.
+- 2026-10-10 — update #6: rapikan format tabel dokumentasi.
